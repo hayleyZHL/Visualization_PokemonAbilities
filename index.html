@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
-		<title>Pokemon Visualization</title>
+		<title>Pokémon Visualization</title>
 		<script src="https://d3js.org/d3.v7.min.js"></script>
 		
 		<style>
@@ -40,7 +40,7 @@
             <h1 style="font-size: 35px;				fill: #242424;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;">Pokemon Visualization ポケットモンスター</h1>
             <select name="name" id="name" style="font-size: 20px;">
-                <option value="who">Select A Pokemon</option>
+                <option value="who">Select A Pokémon</option>
                 <option value="Charizard">Charizard</option>
                 <option value="Gengar">Gengar</option>
                 <option value="Arcanine">Arcanine</option>
@@ -70,7 +70,7 @@
                 <h3 style="color: white" id="Type1text">Type1: </h3>
                 <h3 style="color: white" id="Type2text">Type2: </h3>
                 <h3 style="color: white" id="totaltext">Total: </h3>
-                <h3 style="color: white" id="Legendary">Legendary: </h3>
+                <h3 style="color: white;display:none" id="Legendary">Legendary: </h3>
             </div>
             <div class="radarChart" style=" display:inline;"> </div>
         </div>
@@ -81,7 +81,7 @@
             <svg id="linechart" color ="white" height="550" width="1200" style="margin:20px"  ></svg>
             <h1 style="fill: #242424;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; font-size: 35px;">
-                Overview - Top 20 Pokemons' Ranking
+                Overview - Top 20 Pokémons' Ranking
             </h1>
         </div>
 
