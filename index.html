@@ -1,195 +1,171 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
-		<title>Pokémon Visualization</title>
-		<script src="https://d3js.org/d3.v7.min.js"></script>
-		
-		<style>
-			body {
-				font-family: 'Open Sans', sans-serif;
-				font-weight: 300;
-                text-align: center;
-				cursor: default;
-			}
-			
-			.legend {
-				font-family: 'Raleway', sans-serif;
-				fill: #333333;
-			}
-			
-			.tooltip {
-				fill: #333333;
-			}
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"
+    / >
+    <title>Pokémon Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
-            select{
-            border:none;
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            text-align: center;
+            cursor: default;
+        }
+        select {
+            border: none;
             padding: 10px 20px;
-            border-radius:5px;
-            }
+            border-radius: 5px;
+        }
+        select:focus {
+            outline: none;
+        }
+    </style>
 
-            select:focus{
-            outline:none;
-            }
-		</style>
-	
-	</head>
-	<body style="background-color: #242424;">
-        <head >
-            <img src="Pokemons/pokemon.png" width="150" height="50" alt="Italian Trulli">
-            <h1 style="font-size: 35px;				fill: #242424;
+</head>
+<body style="background-color: #242424;">
+<head>
+    <img alt="Italian Trulli" height="50" src="Pokemons/pokemon.png" width="150">
+    <h1 style="font-size: 35px;				fill: #242424;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;">Pokemon Visualization ポケットモンスター</h1>
-            <h3 style="color: #fff;">Select a Pokémon that you like.</h3>
-            <select name="name" id="name" style="font-size: 20px;">
-                <option value="who">Select A Pokémon</option>
-                <option value="Charizard">Charizard</option>
-                <option value="Gengar">Gengar</option>
-                <option value="Arcanine">Arcanine</option>
-                <option value="Bulbasaur">Bulbasaur</option>
-                <option value="Blaziken">Blaziken</option>
-                <option value="Umbreon">Umbreon</option>
-                <option value="Lucario">Lucario</option>
-                <option value="Gardevoir">Gardevoir</option>
-                <option value="Eevee">Eevee</option>
-                <option value="Dragonite">Dragonite</option>
-                <option value="Absol">Absol</option>
-                <option value="Typhlosion">Typhlosion</option>
-                <option value="Ampharos">Ampharos</option>
-                <option value="Squirtle">Squirtle</option>
-                <option value="Flygon">Flygon</option>
-                <option value="Ninetales">Ninetales</option>
-                <option value="Tyranitar">Tyranitar</option>
-                <option value="Infernape">Infernape</option>
-                <option value="Snorlax">Snorlax</option>
-                <option value="Torterra">Torterra</option>
-              </select>
-        </head>
-        <div style="width:1000px; margin-top:100px; margin-bottom:50px; margin-left:auto; margin-right:auto">
-            <div style="width:300px display:inline; float:left; margin-top:100px">
-                <img src="Pokemons/who.png" width="300" height="300" alt="Italian Trulli" id="image">
-                <h2 style="color: white" id="nametext">Who Am I?</h2>
-                <h3 style="color: white" id="Type1text">Type1: </h3>
-                <h3 style="color: white" id="Type2text">Type2: </h3>
-                <h3 style="color: white" id="totaltext">Total: </h3>
-                <h3 style="color: white;display:none" id="Legendary">Legendary: </h3>
-            </div>
-            <div class="radarChart" style="width:600px; display:inline; float:right"> </div>
-        </div>
+    <h3 style="color: #fff;">Select a Pokémon that you like.</h3>
+    <select id="name" name="name" style="font-size: 20px;">
+        <option value="who">Select A Pokémon</option>
+        <option value="Charizard">Charizard</option>
+        <option value="Gengar">Gengar</option>
+        <option value="Arcanine">Arcanine</option>
+        <option value="Bulbasaur">Bulbasaur</option>
+        <option value="Blaziken">Blaziken</option>
+        <option value="Umbreon">Umbreon</option>
+        <option value="Lucario">Lucario</option>
+        <option value="Gardevoir">Gardevoir</option>
+        <option value="Eevee">Eevee</option>
+        <option value="Dragonite">Dragonite</option>
+        <option value="Absol">Absol</option>
+        <option value="Typhlosion">Typhlosion</option>
+        <option value="Ampharos">Ampharos</option>
+        <option value="Squirtle">Squirtle</option>
+        <option value="Flygon">Flygon</option>
+        <option value="Ninetales">Ninetales</option>
+        <option value="Tyranitar">Tyranitar</option>
+        <option value="Infernape">Infernape</option>
+        <option value="Snorlax">Snorlax</option>
+        <option value="Torterra">Torterra</option>
+    </select>
+</head>
+<div style="width:1000px; margin-top:100px; margin-bottom:50px; margin-left:auto; margin-right:auto">
+    <div style="width:300px; display:inline; float:left; margin-top:100px">
+        <img alt="Italian Trulli" height="300" id="image" src="Pokemons/who.png" width="300">
+        <h2 id="nametext" style="color: white">Who Am I?</h2>
+        <h3 id="Type1text" style="color: white">Type1: </h3>
+        <h3 id="Type2text" style="color: white">Type2: </h3>
+        <h3 id="totaltext" style="color: white">Total: </h3>
+        <h3 id="Legendary" style="color: white;display:none">Legendary: </h3>
+    </div>
+    <div class="radarChart" style="width:600px; display:inline; float:right"></div>
+</div>
 
-        <div style="text-align:center;">
-            <svg id="linechart" color ="white" height="550" width="1200" style="margin:20px"  ></svg>
-            <h3 style="color: #fff;">Click on the Pokémon image icon to check their overall ability, and you can also see the radar chart update accordingly.</h3>
-            <h1 style="fill: #242424;
+<div style="text-align:center;">
+    <svg color="white" height="550" id="linechart" style="margin:20px" width="1200"></svg>
+    <h3 style="color: #fff;">Click on the Pokémon image icon to check their overall ability, and you can also see the
+        radar chart update accordingly.</h3>
+    <h1 style="fill: #242424;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; font-size: 35px;">
-                Overview - Top 20 Pokémons' Ranking
-            </h1>
-        </div>
+        Overview - Top 20 Pokémons' Ranking
+    </h1>
+</div>
 
 
-    </body>
-		<script>
+</body>
+<script>
+    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+    const svgline = d3.select("#linechart");
+    const widthline = svgline.attr("width");
+    const heightline = svgline.attr("height");
+    const marginline = {top: 20, right: 20, bottom: 60, left: 60};
+    const vpWidth = widthline - marginline.left - marginline.right;
+    const vpHeight = heightline - marginline.top - marginline.bottom;
+    const viewport = svgline.append("g")
+        .attr("transform", "translate(" + marginline.left + "," + marginline.top + ")");
+    var data;
 
-			var margin = {top: 100, right: 100, bottom: 100, left: 100},
-				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+    const requestDataFF = async function () {
+        var pokemon_data = await d3.csv('top20.csv');
+        pokemon_data.forEach((d, i) => {
+            //Attack,Defense,SpAtk,SpDef,Speed,Generation,Legendary
+            d['Total'] = Number(d['Total']);
+            d['Attack'] = Number(d['Attack']);
+            d['Defense'] = Number(d['Defense']);
+            d['SpAtk'] = Number(d['SpAtk']);
+            d['SpDef'] = Number(d['SpDef']);
+            d['HP'] = Number(d['HP']);
+            d['Generation'] = Number(d['Generation']);
+            d['Speed'] = Number(d['Speed']);
+            d['#'] = Number(d['#']);
+        })
+        pokemon_data = pokemon_data.sort((a, b) => b.Total - a.Total);
+        var selectElement = document.getElementById("name");
+        selectElement.addEventListener("change", function () {
+            let selected = selectElement.value;
+            const filteredData = pokemon_data.filter(function (d) {
+                return d.Name == selected;
+            });
+            if (document.getElementById("name").value == "who") {
+                document.getElementById("nametext").innerHTML = "Who Am I?";
+                document.getElementById("Type1text").innerHTML = "Type1: ";
+                document.getElementById("Type2text").innerHTML = "Type2: ";
+                document.getElementById("totaltext").innerHTML = "Total: ";
+                document.getElementById("Legendary").innerHTML = "Legendary: ";
+                const image = document.getElementById('image');
+                image.src = 'Pokemons/who.png';
+                data = [
+                    [
+                        {axis: "Hit Points", value: 0},
+                        {axis: "Attack Strength", value: 0},
+                        {axis: "Defensive Strength", value: 0},
+                        {axis: "Special Attack Strength", value: 0},
+                        {axis: "Special Defensive Strength", value: 0},
+                        {axis: "Speed", value: 0},
+                    ]
+                ];
+            } else {
+                document.getElementById("nametext").innerHTML = "Name: " + filteredData[0].Name;
+                document.getElementById("Type1text").innerHTML = "Type1: " + filteredData[0].Type_1;
+                document.getElementById("Type2text").innerHTML = "Type2: " + filteredData[0].Type_2;
+                document.getElementById("totaltext").innerHTML = "Total: " + filteredData[0].Total;
+                document.getElementById("Legendary").innerHTML = "Legendary: " + filteredData[0].Legendary;
+                const image = document.getElementById('image');
+                image.src = 'Pokemons/' + filteredData[0].Name + '.png';
+                data = [
+                    [
+                        {axis: "Hit Points", value: filteredData[0].Attack},
+                        {axis: "Attack Strength", value: filteredData[0].Attack},
+                        {axis: "Defensive Strength", value: filteredData[0].Defense},
+                        {axis: "Special Attack Strength", value: filteredData[0].SpAtk},
+                        {axis: "Special Defensive Strength", value: filteredData[0].SpDef},
+                        {axis: "Speed", value: filteredData[0].Speed},
+                    ]
+                ];
+            }
 
-          const svgline = d3.select("#linechart");
-          const widthline = svgline.attr("width");
-          const heightline = svgline.attr("height");
-          const marginline = { top: 20, right: 20, bottom: 60, left: 60};
-          const vpWidth = widthline - marginline.left - marginline.right;
-          const vpHeight = heightline - marginline.top - marginline.bottom;
-          const viewport = svgline.append("g")
-              .attr("transform","translate("+marginline.left+","+marginline.top+")");
+            var color = d3.scaleOrdinal()
+                .range(["#EDC951", "#CC333F", "#00A0B0"]);
 
-            let data = [
-					  [
-						{axis:"Hit Points",value:0.22},
-						{axis:"Attack Strength",value:0.28},
-						{axis:"Defensive Strength",value:0.29},
-						{axis:"Special Attack Strength",value:0.17},
-						{axis:"Special Defensive Strength",value:0.22},
-                        {axis:"Speed",value:0.22},
-					  ]
-					];
-					
-            const requestDataFF = async function() {
-            var pokemon_data = await d3.csv('top20.csv');
-                pokemon_data.forEach( (d, i) => {
-                    //Attack,Defense,SpAtk,SpDef,Speed,Generation,Legendary
-                    d['Total'] = Number(d['Total']);
-                    d['Attack'] = Number(d['Attack']);
-                    d['Defense'] = Number(d['Defense']);
-                    d['SpAtk'] = Number(d['SpAtk']);
-                    d['SpDef'] = Number(d['SpDef']);
-                    d['HP'] = Number(d['HP']);
-                    d['Generation'] = Number(d['Generation']);
-                    d['Speed'] = Number(d['Speed']);
-                    d['#'] = Number(d['#']);
-                })
+            var radarChartOptions = {
+                w: 400,
+                h: 400,
+                margin: margin,
+                maxValue: 0.5,
+                levels: 5,
+                roundStrokes: true,
+                color: color
+            };
 
-                pokemon_data = pokemon_data.sort((a, b) => b.Total - a.Total);
-                var selectElement = document.getElementById("name");
-                var selectedValue = selectElement.value;
-                selectElement.addEventListener("change", function() {
-                    let selected = selectElement.value;
-                    const filteredData = pokemon_data.filter(function(d) {
-                        return d.Name == selected;
-                    });
+            RadarChart(".radarChart", data, radarChartOptions);
 
-                if (document.getElementById("name").value == "who") {
-                    document.getElementById("nametext").innerHTML = "Who Am I?";
-                    document.getElementById("Type1text").innerHTML = "Type1: ";
-                    document.getElementById("Type2text").innerHTML = "Type2: ";
-                    document.getElementById("totaltext").innerHTML = "Total: ";
-                    document.getElementById("Legendary").innerHTML = "Legendary: ";
-                    const image = document.getElementById('image');
-                    image.src = 'Pokemons/who.png';
-                    data = [
-                        [
-                            {axis:"Hit Points",value:0},
-                            {axis:"Attack Strength",value:0},
-                            {axis:"Defensive Strength",value:0},
-                            {axis:"Special Attack Strength",value:0},
-                            {axis:"Special Defensive Strength",value:0},
-                            {axis:"Speed",value:0},
-                        ]
-                    ];
-
-                } else {
-                    document.getElementById("nametext").innerHTML = "Name: " + filteredData[0].Name;
-                    document.getElementById("Type1text").innerHTML = "Type1: " + filteredData[0].Type_1;
-                    document.getElementById("Type2text").innerHTML = "Type2: " + filteredData[0].Type_2;
-                    document.getElementById("totaltext").innerHTML = "Total: " + filteredData[0].Total;
-                    document.getElementById("Legendary").innerHTML = "Legendary: " + filteredData[0].Legendary;
-                    const image = document.getElementById('image');
-                    image.src = 'Pokemons/' + filteredData[0].Name + '.png';
-                    data = [
-                        [
-                            {axis:"Hit Points",value:filteredData[0].Attack},
-                            {axis:"Attack Strength",value:filteredData[0].Attack},
-                            {axis:"Defensive Strength",value:filteredData[0].Defense},
-                            {axis:"Special Attack Strength",value:filteredData[0].SpAtk},
-                            {axis:"Special Defensive Strength",value:filteredData[0].SpDef},
-                            {axis:"Speed",value:filteredData[0].Speed},
-                        ]
-                    ];
-                }
-
-			var color = d3.scaleOrdinal()
-				.range(["#EDC951","#CC333F","#00A0B0"]);
-				
-			var radarChartOptions = {
-			  w: 400,
-			  h: 400,
-			  margin: margin,
-			  maxValue: 0.5,
-			  levels: 5,
-			  roundStrokes: true,
-			  color: color
-			};
-
-			RadarChart(".radarChart", data, radarChartOptions);
             function RadarChart(id, data, options) {
 
                 var cfg = {
@@ -210,20 +186,28 @@
 
 
                 //Put all of the options into a variable called cfg
-                if('undefined' !== typeof options){
-                for(var i in options){
-                    if('undefined' !== typeof options[i]){ cfg[i] = options[i]; }
-                }//for i
-                }//if
+                if ('undefined' !== typeof options) {
+                    for (var i in options) {
+                        if ('undefined' !== typeof options[i]) {
+                            cfg[i] = options[i];
+                        }
+                    }
+                }
 
-                var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
-                    
-                var allAxis = (data[0].map(function(i, j){return i.axis})),
+                var maxValue = Math.max(cfg.maxValue, d3.max(data, function (i) {
+                    return d3.max(i.map(function (o) {
+                        return o.value;
+                    }))
+                }));
+
+                var allAxis = (data[0].map(function (i, j) {
+                        return i.axis
+                    })),
                     total = allAxis.length,
-                    radius = Math.min(cfg.w/2, cfg.h/2),
+                    radius = Math.min(cfg.w / 2, cfg.h / 2),
                     Format = d3.format('.2s'),
                     angleSlice = Math.PI * 2 / total;
-                
+
                 var rScale = d3.scaleLinear()
                     .range([0, radius])
                     .domain([0, maxValue]);
@@ -231,49 +215,53 @@
                 d3.select(id).select("svg").remove();
 
                 var svg = d3.select(id).append("svg")
-                        .attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
-                        .attr("height", cfg.h +10 + cfg.margin.top + cfg.margin.bottom)
-                        .attr("class", "radar"+id);
+                    .attr("width", cfg.w + cfg.margin.left + cfg.margin.right)
+                    .attr("height", cfg.h + 10 + cfg.margin.top + cfg.margin.bottom)
+                    .attr("class", "radar" + id);
 
                 var g = svg.append("g")
-                        .attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + (cfg.h/2 + cfg.margin.top) + ")");
+                    .attr("transform", "translate(" + (cfg.w / 2 + cfg.margin.left) + "," + (cfg.h / 2 + cfg.margin.top) + ")");
 
-                var filter = g.append('defs').append('filter').attr('id','glow'),
-                    feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
+                var filter = g.append('defs').append('filter').attr('id', 'glow'),
+                    feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur'),
                     feMerge = filter.append('feMerge'),
-                    feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
-                    feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
+                    feMergeNode_1 = feMerge.append('feMergeNode').attr('in', 'coloredBlur'),
+                    feMergeNode_2 = feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
                 var axisGrid = g.append("g").attr("class", "axisWrapper");
-                
+
                 axisGrid.selectAll(".levels")
-                .data(d3.range(1,(cfg.levels+1)).reverse())
-                .enter()
+                    .data(d3.range(1, (cfg.levels + 1)).reverse())
+                    .enter()
                     .append("circle")
                     .attr("class", "gridCircle")
-                    .attr("r", function(d, i){return radius/cfg.levels*d;})
+                    .attr("r", function (d, i) {
+                        return radius / cfg.levels * d;
+                    })
                     .style("fill", "#CDCDCD")
                     .style("stroke", "#CDCDCD")
                     .style("fill-opacity", cfg.opacityCircles)
-                    .style("filter" , "url(#glow)");
+                    .style("filter", "url(#glow)");
 
                 axisGrid.selectAll(".axisLabel")
-                .data(d3.range(1,(cfg.levels+1)).reverse())
-                .enter().append("text")
-                .attr("class", "axisLabel")
-                .attr("x", 4)
-                .attr("y", function(d){return -d*radius/cfg.levels;})
-                .attr("dy", "0.4em")
-                .style("font-size", "15px")
-                .attr("fill", "#fff")
-                .text(function(d,i) {
-                    let val = maxValue * d/cfg.levels
-                    if ( val < 1 ) {
-                        return 0
-                    } else {
-                        return Format( val );
-                    }
-                });
+                    .data(d3.range(1, (cfg.levels + 1)).reverse())
+                    .enter().append("text")
+                    .attr("class", "axisLabel")
+                    .attr("x", 4)
+                    .attr("y", function (d) {
+                        return -d * radius / cfg.levels;
+                    })
+                    .attr("dy", "0.4em")
+                    .style("font-size", "15px")
+                    .attr("fill", "#fff")
+                    .text(function (d, i) {
+                        let val = maxValue * d / cfg.levels
+                        if (val < 1) {
+                            return 0
+                        } else {
+                            return Format(val);
+                        }
+                    });
 
                 var axis = axisGrid.selectAll(".axis")
                     .data(allAxis)
@@ -284,8 +272,12 @@
                 axis.append("line")
                     .attr("x1", 0)
                     .attr("y1", 0)
-                    .attr("x2", function(d, i){ return rScale(maxValue*1.1) * Math.cos(angleSlice*i - Math.PI/2); })
-                    .attr("y2", function(d, i){ return rScale(maxValue*1.1) * Math.sin(angleSlice*i - Math.PI/2); })
+                    .attr("x2", function (d, i) {
+                        return rScale(maxValue * 1.1) * Math.cos(angleSlice * i - Math.PI / 2);
+                    })
+                    .attr("y2", function (d, i) {
+                        return rScale(maxValue * 1.1) * Math.sin(angleSlice * i - Math.PI / 2);
+                    })
                     .attr("class", "line")
                     .style("stroke", "white")
                     .style("stroke-width", "2px");
@@ -296,66 +288,92 @@
                     .attr("text-anchor", "middle")
                     .attr("dy", "0.35em")
                     .style("fill", "#fff")
-                    .attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
-                    .attr("y", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2); })
-                    .text(function(d){return d})
+                    .attr("x", function (d, i) {
+                        return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
+                    })
+                    .attr("y", function (d, i) {
+                        return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
+                    })
+                    .text(function (d) {
+                        return d
+                    })
                     .call(wrap, cfg.wrapWidth);
 
                 const radarLine = d3.lineRadial()
-                                .curve(d3.curveLinearClosed)
-                                .angle(function(d,i) {	return i*angleSlice; })
-                                .radius(function(d) { return rScale(d.value); });
+                    .curve(d3.curveLinearClosed)
+                    .angle(function (d, i) {
+                        return i * angleSlice;
+                    })
+                    .radius(function (d) {
+                        return rScale(d.value);
+                    });
 
-                if(cfg.roundStrokes) {
+                if (cfg.roundStrokes) {
                     radarLine.curve(d3.curveCardinalClosed);
                 }
-                            
+
                 var blobWrapper = g.selectAll(".radarWrapper")
                     .data(data)
                     .enter().append("g")
                     .attr("class", "radarWrapper");
-                        
+
                 blobWrapper
                     .append("path")
                     .attr("class", "radarArea")
-                    .attr("d", function(d,i) { return radarLine(d); })
-                    .style("fill", function(d,i) { return cfg.color(i); })
+                    .attr("d", function (d, i) {
+                        return radarLine(d);
+                    })
+                    .style("fill", function (d, i) {
+                        return cfg.color(i);
+                    })
                     .style("fill-opacity", cfg.opacityArea)
-                    .on('mouseover', function (d,i){
+                    .on('mouseover', function (d, i) {
                         //Dim all blobs
                         d3.selectAll(".radarArea")
                             .transition().duration(200)
-                            .style("fill-opacity", 0.1); 
+                            .style("fill-opacity", 0.1);
                         //Bring back the hovered over blob
                         d3.select(this)
                             .transition().duration(200)
-                            .style("fill-opacity", 0.7);	
+                            .style("fill-opacity", 0.7);
                     })
-                    .on('mouseout', function(){
+                    .on('mouseout', function () {
                         //Bring back all blobs
                         d3.selectAll(".radarArea")
                             .transition().duration(200)
                             .style("fill-opacity", cfg.opacityArea);
                     });
-                    
+
                 //Create the outlines	
                 blobWrapper.append("path")
                     .attr("class", "radarStroke")
-                    .attr("d", function(d,i) { return radarLine(d); })
+                    .attr("d", function (d, i) {
+                        return radarLine(d);
+                    })
                     .style("stroke-width", cfg.strokeWidth + "px")
-                    .style("stroke", function(d,i) { return cfg.color(i); })
+                    .style("stroke", function (d, i) {
+                        return cfg.color(i);
+                    })
                     .style("fill", "none")
-                    .style("filter" , "url(#glow)");		
-                
+                    .style("filter", "url(#glow)");
+
                 //Append the circles
                 blobWrapper.selectAll(".radarCircle")
-                    .data(function(d,i) { return d; })
+                    .data(function (d, i) {
+                        return d;
+                    })
                     .enter().append("circle")
                     .attr("class", "radarCircle")
                     .attr("r", cfg.dotRadius)
-                    .attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
-                    .attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
-                    .style("fill", function(d,i,j) { return cfg.color(j); })
+                    .attr("cx", function (d, i) {
+                        return rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2);
+                    })
+                    .attr("cy", function (d, i) {
+                        return rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2);
+                    })
+                    .style("fill", function (d, i, j) {
+                        return cfg.color(j);
+                    })
                     .style("fill-opacity", 0.8);
 
                 //Wrapper for the invisible circles on top
@@ -363,20 +381,26 @@
                     .data(data)
                     .enter().append("g")
                     .attr("class", "radarCircleWrapper");
-                    
+
                 //Append a set of invisible circles on top for the mouseover pop-up
                 blobCircleWrapper.selectAll(".radarInvisibleCircle")
-                    .data(function(d,i) { return d; })
+                    .data(function (d, i) {
+                        return d;
+                    })
                     .enter().append("circle")
                     .attr("class", "radarInvisibleCircle")
-                    .attr("r", cfg.dotRadius*1.5)
-                    .attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
-                    .attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
+                    .attr("r", cfg.dotRadius * 1.5)
+                    .attr("cx", function (d, i) {
+                        return rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2);
+                    })
+                    .attr("cy", function (d, i) {
+                        return rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2);
+                    })
                     .style("fill", "none")
                     .style("pointer-events", "all")
-                    .on("mouseover", function(d,i) {
-                        newX =  parseFloat(d3.select(this).attr('cx')) - 10;
-                        newY =  parseFloat(d3.select(this).attr('cy')) - 10;
+                    .on("mouseover", function (d, i) {
+                        newX = parseFloat(d3.select(this).attr('cx')) - 10;
+                        newY = parseFloat(d3.select(this).attr('cy')) - 10;
 
                         tooltip
                             .attr('x', newX)
@@ -386,7 +410,7 @@
                             .style('fill', "white")
                             .style('opacity', 1);
                     })
-                    .on("mouseout", function(){
+                    .on("mouseout", function () {
                         tooltip.transition().duration(200)
                             .style("opacity", 0);
                     });
@@ -397,45 +421,43 @@
                     .style("opacity", 0);
 
                 function wrap(text, width) {
-                text.each(function() {
-                    var text = d3.select(this),
-                        words = text.text().split(/\s+/).reverse(),
-                        word,
-                        line = [],
-                        lineNumber = 0,
-                        lineHeight = 1.4, // ems
-                        y = text.attr("y"),
-                        x = text.attr("x"),
-                        dy = parseFloat(text.attr("dy")),
-                        tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
-                        
-                    while (word = words.pop()) {
-                    line.push(word);
-                    tspan.text(line.join(" "));
-                    if (tspan.node().getComputedTextLength() > width) {
-                        line.pop();
-                        tspan.text(line.join(" "));
-                        line = [word];
-                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                    }
-                    }
-                });
-                }//wrap	
-                
+                    text.each(function () {
+                        var text = d3.select(this),
+                            words = text.text().split(/\s+/).reverse(),
+                            word,
+                            line = [],
+                            lineNumber = 0,
+                            lineHeight = 1.4, // ems
+                            y = text.attr("y"),
+                            x = text.attr("x"),
+                            dy = parseFloat(text.attr("dy")),
+                            tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+
+                        while (word = words.pop()) {
+                            line.push(word);
+                            tspan.text(line.join(" "));
+                            if (tspan.node().getComputedTextLength() > width) {
+                                line.pop();
+                                tspan.text(line.join(" "));
+                                line = [word];
+                                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                            }
+                        }
+                    });
+                }
             }//RadarChart
         })
 
         // Initialize change event
         document.getElementById("name").dispatchEvent(new Event('change'));
 
-
         // Line Charts
         const xLine = d3.scaleBand()
             .domain(pokemon_data.map(d => d.Name))
             // .domain(d3.extent(data, d => d.Name))
-            .range([ 0, vpWidth ]);
+            .range([0, vpWidth]);
         viewport.append("g")
-            .attr("transform", `translate(0,  ${vpHeight+5})`)
+            .attr("transform", `translate(0,  ${vpHeight + 5})`)
             .call(d3.axisBottom(xLine).ticks(0))
             .selectAll("text")
             .style("fill", "white")
@@ -444,8 +466,8 @@
             .style("text-anchor", "middle");
 
         const yLine = d3.scaleLinear()
-            .domain([250,650])
-            .range([ vpHeight, 0 ]);
+            .domain([250, 650])
+            .range([vpHeight, 0]);
         viewport.append("g")
             .attr("transform", `translate(-5,0)`)
             .call(d3.axisLeft(yLine))
@@ -456,8 +478,8 @@
             .attr("text-anchor", "end")
             .attr("font-size", "18")
             .style("fill", "white")
-            .attr("x", vpWidth/2)
-            .attr("y", vpHeight+marginline.top+40)
+            .attr("x", vpWidth / 2)
+            .attr("y", vpHeight + marginline.top + 40)
             .text("Pokémon");
         // Y axis label:
         viewport.append("text")
@@ -465,8 +487,8 @@
             .attr("font-size", "18")
             .style("fill", "white")
             .attr("transform", "rotate(-90)")
-            .attr("y", -marginline.left+15)
-            .attr("x", -(vpHeight/2)+50)
+            .attr("y", -marginline.left + 15)
+            .attr("x", -(vpHeight / 2) + 50)
             .text("Total Abilities")
 
         // Add the area
@@ -477,25 +499,25 @@
             .attr("stroke", "none")
             .style("stroke", "white")
             .attr("d", d3.area()
-                .x(d => xLine(d.Name)+25)
-                .y0( 0 )
+                .x(d => xLine(d.Name) + 25)
+                .y0(0)
                 .y1(vpHeight)
             )
             .transition()
             .duration(1200)
             .attr("d", d3.area()
-                .x(d => xLine(d.Name)+25)
-                .y0( d => yLine(d.Total) )
+                .x(d => xLine(d.Name) + 25)
+                .y0(d => yLine(d.Total))
                 .y1(vpHeight)
             );
 
         // Add the line
         let lineCurve = viewport.append("path")
             .datum(pokemon_data)
-                .attr("d", d3.line()
-                    .x(d => xLine(d.Name)+25)
-                    .y(d => yLine(d.Total))
-                );
+            .attr("d", d3.line()
+                .x(d => xLine(d.Name) + 25)
+                .y(d => yLine(d.Total))
+            );
         let length = lineCurve.node().getTotalLength(); // Get line length
         lineCurve.attr("stroke-dasharray", length + " " + length)
             .attr("stroke-dashoffset", length)
@@ -508,104 +530,104 @@
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
 
-                // tooltip
-                let tooltipline = viewport
-                    .append("text")
-                    .attr("class", "tooltip")
-                    .attr("opacity", 0)
-                    .attr("background-color", "white")
-                    .style("fill", "#fff")
-                    .attr("border-radius", "5px")
-                    .attr("font-size", "15px")
-                    .attr('x', 0)
-                    .attr('y', 0)
-                    .attr('font-size', '2em')
+        // tooltip
+        let tooltipline = viewport
+            .append("text")
+            .attr("class", "tooltip")
+            .attr("opacity", 0)
+            .attr("background-color", "white")
+            .style("fill", "#fff")
+            .attr("border-radius", "5px")
+            .attr("font-size", "15px")
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('font-size', '2em')
 
-                const showTooltipCircle = function(event, d) {
+        const showTooltipCircle = function (event, d) {
 
-                    tooltipline.transition().duration(200).style("opacity", 1)
-                        .text("Name: " + d.Name  +" Total Ability: " + d.Total)
-                        .attr("x", (event.x)-270 + "px")
-                        .attr("y", (event.y)-270+ "px")
-                }
-                const moveTooltipCircle = function(event, d) {
-                    tooltipline
-                        .attr("x", (event.x)-270+ "px")
-                        .attr("y", (event.y)-270+ "px")
-                }
-
-                const hideTooltipCircle = function(event, d) {
-                    tooltipline.transition()
-                        .duration(200)
-                        .style("opacity", 0)
-                }
-
-                // Circles
-                let defs = viewport.append("defs")
-                defs.selectAll("pattern")
-                    .data(pokemon_data)
-                    .join("pattern")
-                    .attr("id", d => "avatar" + d.Name)
-                    .attr("width", 1)
-                    .attr("height", 1)
-                    .append("svg:image")
-                    .attr("xlink:href", d => "Pokemons/" + d.Name + ".png")
-                    .attr("height", 60)
-                    .attr("width", 60);
-
-                let icons = viewport.selectAll("circle")
-                    .data(pokemon_data)
-                    .join("circle")
-                    .attr("class", "lineIcon")
-                    .style("fill", "#fff")
-                    .style("fill", function(d) {
-                        return ("url(#avatar" + d.Name + ")")
-                    })
-                    .attr("stroke", "none")
-                    .attr("cx", d => xLine(d.Name)+25)
-                    .attr("cy", d => yLine(d.Total))
-                    .attr("r", 0)
-                    .on('mouseover', function (i,d){
-                        showTooltipCircle(i,d)
-                        d3.selectAll(".lineIcon")
-                            .transition()
-                            .duration(200)
-                            .style("fill-opacity", 0.5);
-                        d3.select(this)
-                            .transition()
-                            .duration(200)
-                            .style("fill-opacity", 1)
-                            .style("stroke", "pink")
-                            .style("stroke-width", 20)
-                    })
-                    .on("mousemove", moveTooltipCircle )
-                    .on('mouseout', function (i,d){
-                        hideTooltipCircle(i,d)
-                        d3.selectAll(".lineIcon")
-                            .transition()
-                            .duration(200)
-                            .style("fill-opacity", 1);
-                        d3.select(this)
-                            .transition()
-                            .delay(0)
-                            .duration(200)
-                            .style("stroke", "none")
-                    })
-                    .on("click", function(i, d){
-                        updateSelection(d.Name)
-                    })
-                icons
-                    .transition()
-                    .delay((d,i)=> (i+1) * 90 + 600)
-                    .duration(1200)
-                    .attr("r", 30)
-
-                function updateSelection(pokemonName) {
-                    selectElement.value = pokemonName;
-                    selectElement.dispatchEvent(new Event('change'));
-                }
+            tooltipline.transition().duration(200).style("opacity", 1)
+                .text("Name: " + d.Name + " Total Ability: " + d.Total)
+                .attr("x", (event.x) - 270 + "px")
+                .attr("y", (event.y) - 270 + "px")
         }
-            requestDataFF(data);
+        const moveTooltipCircle = function (event, d) {
+            tooltipline
+                .attr("x", (event.x) - 270 + "px")
+                .attr("y", (event.y) - 270 + "px")
+        }
 
-        </script>
+        const hideTooltipCircle = function (event, d) {
+            tooltipline.transition()
+                .duration(200)
+                .style("opacity", 0)
+        }
+
+        // Circles
+        let defs = viewport.append("defs")
+        defs.selectAll("pattern")
+            .data(pokemon_data)
+            .join("pattern")
+            .attr("id", d => "avatar" + d.Name)
+            .attr("width", 1)
+            .attr("height", 1)
+            .append("svg:image")
+            .attr("xlink:href", d => "Pokemons/" + d.Name + ".png")
+            .attr("height", 60)
+            .attr("width", 60);
+
+        let icons = viewport.selectAll("circle")
+            .data(pokemon_data)
+            .join("circle")
+            .attr("class", "lineIcon")
+            .style("fill", "#fff")
+            .style("fill", function (d) {
+                return ("url(#avatar" + d.Name + ")")
+            })
+            .attr("stroke", "none")
+            .attr("cx", d => xLine(d.Name) + 25)
+            .attr("cy", d => yLine(d.Total))
+            .attr("r", 0)
+            .on('mouseover', function (i, d) {
+                showTooltipCircle(i, d)
+                d3.selectAll(".lineIcon")
+                    .transition()
+                    .duration(200)
+                    .style("fill-opacity", 0.5);
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .style("fill-opacity", 1)
+                    .style("stroke", "pink")
+                    .style("stroke-width", 20)
+            })
+            .on("mousemove", moveTooltipCircle)
+            .on('mouseout', function (i, d) {
+                hideTooltipCircle(i, d)
+                d3.selectAll(".lineIcon")
+                    .transition()
+                    .duration(200)
+                    .style("fill-opacity", 1);
+                d3.select(this)
+                    .transition()
+                    .delay(0)
+                    .duration(200)
+                    .style("stroke", "none")
+            })
+            .on("click", function (i, d) {
+                updateSelection(d.Name)
+            })
+        icons
+            .transition()
+            .delay((d, i) => (i + 1) * 90 + 600)
+            .duration(1200)
+            .attr("r", 30)
+
+        function updateSelection(pokemonName) {
+            selectElement.value = pokemonName;
+            selectElement.dispatchEvent(new Event('change'));
+        }
+    }
+    requestDataFF(data);
+
+</script>
 </html>
